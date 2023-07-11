@@ -6,11 +6,7 @@ const router = express.Router()
 
 router.post('/', async (req, res) => { 
     try {
-        const newHabit: Habit = {
-            name: req.body.name,
-            frequency: req.body.frequency,
-            userId: req.body.userId
-        }
+        const newHabit = req.body as Habit
         const newHabitDoc = await createHabit(newHabit)
         res.send(`Created a new habit: ${newHabitDoc.id}`)
     } catch (error) {
