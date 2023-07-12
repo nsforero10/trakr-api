@@ -1,6 +1,6 @@
-import { db } from '../config/firebase';
+import { db } from '../config/firebase'
 import { collection, addDoc, query, where, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore"
-import { Habit } from '../types';
+import { Habit } from '../types'
 
 
 const habitsRef = collection(db, "habits")
