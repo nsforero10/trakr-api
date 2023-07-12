@@ -1,10 +1,16 @@
 import express from 'express'
-import { createHabit, getHabitsByUserId, updateHabit, deleteHabit} from '../services/habitService'
+import {
+    createHabit,
+    getHabitsByUserId,
+    updateHabit,
+    deleteHabit,
+} from '../services/habitService'
 import { Habit } from '../types'
 
+// eslint-disable-next-line new-cap
 const router = express.Router()
 
-router.post('/', async (req, res) => { 
+router.post('/', async (req, res) => {
     try {
         const newHabit = req.body as Habit
         const newHabitDoc = await createHabit(newHabit)
@@ -18,7 +24,7 @@ router.post('/', async (req, res) => {
 router.get('/user/:id', async (req, res) => {
     try {
         const userId = req.params.id
-        const userHabits =  await getHabitsByUserId(userId)
+        const userHabits = await getHabitsByUserId(userId)
         res.send(userHabits)
     } catch (error) {
         console.log(error)
@@ -26,8 +32,7 @@ router.get('/user/:id', async (req, res) => {
     }
 })
 
-
-router.put('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const habit = req.body as Habit
         const habitId = req.params.id
@@ -40,7 +45,7 @@ router.put('/:id', async(req, res) => {
     }
 })
 
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const habitId = req.params.id
         await deleteHabit(habitId)

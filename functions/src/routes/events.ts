@@ -1,8 +1,14 @@
 import express from 'express'
-import { createEvent, updateEvent, getEventsByUserId, deleteEvent } from '../services/eventService'
+import {
+    createEvent,
+    updateEvent,
+    getEventsByUserId,
+    deleteEvent,
+} from '../services/eventService'
 import { Event } from '../types'
 
-const router  = express.Router()
+// eslint-disable-next-line new-cap
+const router = express.Router()
 
 router.post('/', async (req, res) => {
     try {
@@ -11,14 +17,17 @@ router.post('/', async (req, res) => {
         res.send(`Created a new event: ${newEventDoc.id}`)
     } catch (error) {
         console.log(error)
-        res.status(400).send('Event should include name, description, startDate, finishDate, and userId')
+        res.status(400).send(
+            'Event should include name, description, ' +
+                'startDate, finishDate, and userId',
+        )
     }
 })
 
 router.get('/user/:id', async (req, res) => {
     try {
         const userId = req.params.id
-        const userEvents =  await getEventsByUserId(userId)
+        const userEvents = await getEventsByUserId(userId)
         res.send(userEvents)
     } catch (error) {
         console.log(error)
@@ -26,7 +35,7 @@ router.get('/user/:id', async (req, res) => {
     }
 })
 
-router.put('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const event = req.body as Event
         const eventId = req.params.id
@@ -39,7 +48,7 @@ router.put('/:id', async(req, res) => {
     }
 })
 
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const eventId = req.params.id
         await deleteEvent(eventId)

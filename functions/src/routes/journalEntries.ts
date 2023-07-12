@@ -1,7 +1,13 @@
 import express from 'express'
-import { createJournalEntry, deleteJournalEntry, getJournalEntriesByUserId, updateJournalEntry } from '../services/journalEntryService'
+import {
+    createJournalEntry,
+    deleteJournalEntry,
+    getJournalEntriesByUserId,
+    updateJournalEntry,
+} from '../services/journalEntryService'
 import { JournalEntry } from '../types'
 
+// eslint-disable-next-line new-cap
 const router = express.Router()
 
 router.post('/', async (req, res) => {
@@ -11,7 +17,9 @@ router.post('/', async (req, res) => {
         res.send(`Created a new journal entry: ${newJournalEntryDoc.id}`)
     } catch (error) {
         console.log(error)
-        res.status(400).send('Journal entry should include title, content, and userId')
+        res.status(400).send(
+            'Journal entry should include title, content, and userId',
+        )
     }
 })
 
@@ -31,7 +39,10 @@ router.put('/:id', async (req, res) => {
         const journalEntry = req.body as JournalEntry
         const journalEntryId = req.params.id
 
-        const updatedJournalEntryId = await updateJournalEntry(journalEntry, journalEntryId)
+        const updatedJournalEntryId = await updateJournalEntry(
+            journalEntry,
+            journalEntryId,
+        )
         res.send(`Updated journal entry: ${updatedJournalEntryId}`)
     } catch (error) {
         console.log(error)
