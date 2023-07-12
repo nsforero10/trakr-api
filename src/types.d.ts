@@ -20,3 +20,11 @@ export interface Event {
     finishDate: Date | number
     userId: string
 }
+
+export interface JournalEntry {
+    id?: string
+    title: string
+    content: string
+    date: Date
+    userId: string
+}
