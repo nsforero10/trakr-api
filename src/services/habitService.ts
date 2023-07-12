@@ -24,7 +24,8 @@ export const getHabitsByUserId = async (userId: string) => {
 
 export const updateHabit = async (habit: Habit, habitId: string) => {
     const habitRef = doc(habitsRef ,habitId)
-    return await setDoc(habitRef, habit)
+    await setDoc(habitRef, habit)
+    return habitId
 }
 
 export const deleteHabit = async (habitId: string) => {

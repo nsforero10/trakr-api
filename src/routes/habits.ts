@@ -30,10 +30,10 @@ router.get('/user/:id', async (req, res) => {
 router.put('/:id', async(req, res) => {
     try {
         const habit = req.body as Habit
-        habit.id = req.params.id
+        const habitId = req.params.id
 
-        await updateHabit(habit, habit.id)
-        res.send(`Updated habit: ${habit.id}`)
+        const updatedHabitId = await updateHabit(habit, habitId)
+        res.send(`Updated habit: ${updatedHabitId}`)
     } catch (error) {
         console.log(error)
         res.status(400).send('Invalid habit id')
